@@ -1,6 +1,8 @@
 package modelo.servicios;
 
-public class bomberos implements servicioEmergencia {
+import controlador.observador;
+
+public class bomberos implements servicioEmergencia, observador {
     private int VehiculosDisponibles;
     private int bomberosDisponibles;
 
@@ -76,6 +78,12 @@ public class bomberos implements servicioEmergencia {
                 return 0;
         }
 
+    }
+
+    @Override // de la interfaz observador.
+    public void notificar(String mensaje) {
+      System.out.println(" bomberos notificados "+mensaje);
+        throw new UnsupportedOperationException("Unimplemented method 'notificar'");
     }
 
 }

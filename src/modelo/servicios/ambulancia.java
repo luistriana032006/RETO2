@@ -1,6 +1,8 @@
 package modelo.servicios;
 
-public class ambulancia implements servicioEmergencia {
+import controlador.observador;
+
+public class ambulancia implements servicioEmergencia, observador {
 
     private int AmbulanciasDisponibles;
     private int PersonalDisponible;
@@ -78,6 +80,12 @@ public class ambulancia implements servicioEmergencia {
                         "Introdución de un nivel de gravedad erroneo para asignar vehiculos, vehiculos asigandos");
                 return 0;
         }
+    }
+
+    @Override
+    public void notificar(String mensaje) {
+      System.out.println(" ambulancia notificada "+mensaje);
+        throw new UnsupportedOperationException("Unimplemented method 'notificar'");
     }
 
 }

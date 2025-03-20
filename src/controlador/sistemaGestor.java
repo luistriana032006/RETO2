@@ -1,6 +1,8 @@
 package controlador;
 
 import java.util.ArrayList;
+
+import Utilidades.EstrategiaPorPrioridad;
 import modelo.emergencias.*;
 import modelo.servicios.*;
 
@@ -30,8 +32,9 @@ import modelo.servicios.*;
  * 
  * 
  */
-public class sistemaGestor {
-
+public class sistemaGestor extends sujeto {
+   // estrategy 
+   private EstrategiaPorPrioridad estrategia;
     // singleton.
     private static sistemaGestor instancia;
 
@@ -43,12 +46,12 @@ public class sistemaGestor {
 
     private sistemaGestor() // constructor privado para el singleton
     {
-
+this.emergencias = new ArrayList<>();
         bomberos bomberos = new bomberos(3, 6);
         ambulancia ambulancia = new ambulancia(4, 12);
         policia policia = new policia(3, 10);
     }
-
+// obtener singleton
     public static sistemaGestor getinstancia() {
 
         if (instancia == null) {
@@ -73,6 +76,12 @@ public class sistemaGestor {
     public void registrarEmergencia(Emergencia emergencia) {
         emergencias.add(emergencia);
         System.out.println(" Emergencia resgistrada: " + emergencia.getTipo());
+       // if for the strategy of emergencia. class
+
+       if (estrategia != null){
+     estrategia.asignarPrioridad(emergencia);
+    }
+
         asignarRecursos(emergencia);
     }
 
@@ -92,5 +101,8 @@ public class sistemaGestor {
         System.out.println("\n estadisticas del dia ");
         System.out.println(" total de emergencias atendidas " + emergencias.size());
     }
-
+    // metodo para cambiar la estrategia.
+ public void SetEstrategia (EstrategiaPorPrioridad estrategia){
+this.estrategia = estrategia;
+}
 }

@@ -1,5 +1,6 @@
 package Utilidades;
-
-public class EstrategiaPrioridad {
-
+import modelo.emergencias.Emergencia;
+public interface EstrategiaPrioridad {
+    // que funcion hace este metodo.
+void asignarPrioridad(Emergencia emergencia);
 }

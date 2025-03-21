@@ -32,7 +32,7 @@ public class policia implements servicioEmergencia, observador {
 
     @Override
     public void evaluarEstado() {
-
+        System.out.println(" los policias disponibles son "+getPoliciasDisponibles() + " el numero de patrullas disponibles son"+getPatrullasDisponibles());
     }
 
     @Override

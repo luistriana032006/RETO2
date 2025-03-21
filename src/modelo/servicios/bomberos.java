@@ -2,12 +2,12 @@ package modelo.servicios;
 
 import controlador.observador;
 
-public class bomberos implements servicioEmergencia, observador {
+public class Bomberos implements servicioEmergencia, observador {
     private int VehiculosDisponibles;
     private int bomberosDisponibles;
 
     // constructor
-    public bomberos(int vehiculosDisponibles, int bomberosDisponibles) {
+    public Bomberos(int vehiculosDisponibles, int bomberosDisponibles) {
         this.VehiculosDisponibles = vehiculosDisponibles;
         this.bomberosDisponibles = bomberosDisponibles; // INICIALIZACION DIRECTA
     }
@@ -37,8 +37,8 @@ public class bomberos implements servicioEmergencia, observador {
     @Override
     public void evaluarEstado() {
         // evaluamos el estado de los atributos de la clase mostrando la cantidad de recursos disponibles.
-        System.out.println(" Los carros de bomberos disponibles son " + getVehiculosDisponibles() + " los Bomberos disponibles  para responder tu solicitud son"+getBomberosDisponibles());
-        throw new UnsupportedOperationException("Unimplemented method 'evaluarEstado'");
+        System.out.println(" Los carros de bomberos disponibles son " + getVehiculosDisponibles() + " los Bomberos disponibles  para responder tu solicitud son "+getBomberosDisponibles());
+       
     }
 
     // metodo auxiliar

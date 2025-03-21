@@ -21,7 +21,7 @@ public class EstrategiaPorPrioridad implements EstrategiaPrioridad {
     }
 
 
-        throw new UnsupportedOperationException("Unimplemented method 'asignarPrioridad'");
+      
     }
 
 }

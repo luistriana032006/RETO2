@@ -2,55 +2,73 @@ package vista;
 
 import java.util.Scanner;
 
+import Utilidades.EstrategiaPorPrioridad;
 import Utilidades.fabricaEmergencias;
 import controlador.sistemaGestor;
 import modelo.emergencias.Emergencia;
+
 public class menu {
- public static void main(String[] args) {
-    Scanner entrada = new Scanner (System.in);
-// traemos la instancia del sistema gestor (el patron de diseño singleton )
-    sistemaGestor gestor = sistemaGestor.getinstancia();
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        // traemos la instancia del sistema gestor (el patron de diseño singleton )
+        sistemaGestor gestor = sistemaGestor.getInstancia();
 
-    boolean continuar = true;
+        boolean continuar = true;
 
-    while (continuar) {
-        System.out.println("\n--- Sistema de Gestión de Emergencias ---");
-        System.out.println("1. Registrar una nueva emergencia");
-        System.out.println("2. Ver el estado de los recursos");
-        System.out.println("3. Ver estadísticas del sistema");
-        System.out.println("4. Salir");
-        System.out.print("Elige una opción: ");
+        while (continuar) {
+            System.out.println("\n--- Sistema de Gestión de Emergencias ---");
+            System.out.println("1. Registrar una nueva emergencia");
+            System.out.println("2. Ver el estado de los recursos");
+            System.out.println("3. Ver estadísticas del sistema");
+            System.out.println("4. Salir");
+            System.out.println(" 5. selcciona una estrategia por prioridad");
+            System.out.print("Elige una opción: ");
 
-        int opcion = entrada.nextInt();
-        entrada.nextLine(); // Limpia el buffer
+            int opcion = entrada.nextInt();
+            entrada.nextLine(); // Limpia el buffer
 
-        switch (opcion) {
-            case 1:
-            registrarEmergencia(entrada, gestor);
-                break;
+            switch (opcion) {
+                case 1:
+                    registrarEmergencia(entrada, gestor);
+                    break;
 
-            case 2:
-                gestor.mostrarEstadoRecursos();
-                break;
+                case 2:
+                    gestor.mostrarEstadoRecursos();
+                    break;
 
-            case 3:
-                gestor.mostrarEstadisticas();
-                break;
+                case 3:
+                    gestor.mostrarEstadisticas();
+                    break;
 
-            case 4:
-                continuar = false;
-                System.out.println("Saliendo del sistema. ¡Hasta luego!");
-                break;
+                case 4:
+                    continuar = false;
+                    System.out.println("Saliendo del sistema. ¡Hasta luego!");
+                    break;
+                case 5: // Cambiar estrategia
+                    System.out.println("Selecciona una estrategia de prioridad:");
+                    System.out.println("1. Priorizar por gravedad");
+                    System.out.println("2. Priorizar por tipo de emergencia");
+                    int opcionEstrategia = entrada.nextInt();
+                    entrada.nextLine();
 
-            default:
-                System.out.println("Opción no válida. Por favor, elige una opción entre 1 y 4.");
+                    if (opcionEstrategia == 1) {
+                        gestor.SetEstrategia(new EstrategiaPorPrioridad());
+                    } else if (opcionEstrategia == 2) {
+                        gestor.SetEstrategia(new EstrategiaPorPrioridad());
+                    } else {
+                        System.out.println("Opción no válida.");
+                    }
+                    break;
+
+                default:
+                    System.out.println("Opción no válida. Por favor, elige una opción entre 1 y 4.");
+            }
         }
+
+        entrada.close();
     }
 
-    entrada.close();
-}
-
-//Método para registrar una nueva emergencia
+    // Método para registrar una nueva emergencia
     private static void registrarEmergencia(Scanner scanner, sistemaGestor gestor) {
         System.out.println("\n--- Registrar Emergencia ---");
 
@@ -75,11 +93,10 @@ public class menu {
 
         // Crear la emergencia usando la fábrica
         try {
-           Emergencia emergencia = fabricaEmergencias.crearEmergencia(tipo, ubicacion);
+            Emergencia emergencia = fabricaEmergencias.crearEmergencia(tipo, ubicacion);
             gestor.registrarEmergencia(emergencia);
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
- }
-
+}

@@ -10,7 +10,7 @@ import modelo.emergencias.Emergencia;
 public class menu {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
-        // traemos la instancia del sistema gestor (el patron de diseño singleton )
+        // Traer la instancia del sistema gestor (patrón Singleton)
         sistemaGestor gestor = sistemaGestor.getInstancia();
 
         boolean continuar = true;
@@ -20,48 +20,47 @@ public class menu {
             System.out.println("1. Registrar una nueva emergencia");
             System.out.println("2. Ver el estado de los recursos");
             System.out.println("3. Ver estadísticas del sistema");
-            System.out.println("4. Salir");
-            System.out.println(" 5. selcciona una estrategia por prioridad");
+            System.out.println("4. Seleccionar estrategia de prioridad");
+            System.out.println("5. Resolver emergencias");
+            System.out.println("6. Mostrar emergencias pendientes");
+            System.out.println("7. Salir");
             System.out.print("Elige una opción: ");
 
             int opcion = entrada.nextInt();
             entrada.nextLine(); // Limpia el buffer
 
             switch (opcion) {
-                case 1:
+                case 1: // Registrar Emergencia
                     registrarEmergencia(entrada, gestor);
                     break;
 
-                case 2:
+                case 2: // Ver Estado de Recursos
                     gestor.mostrarEstadoRecursos();
                     break;
 
-                case 3:
+                case 3: // Ver Estadísticas del Sistema
                     gestor.mostrarEstadisticas();
                     break;
 
-                case 4:
+                case 4: // Seleccionar Estrategia de Prioridad
+                    seleccionarEstrategia(entrada, gestor);
+                    break;
+
+                case 5: // Resolver Emergencias
+                    gestor.resolverEmergencia();
+                    break;
+
+                case 6: // Mostrar Emergencias Pendientes
+                    gestor.mostrarEmergenciasPendientes();
+                    break;
+
+                case 7: // Salir del Sistema
                     continuar = false;
                     System.out.println("Saliendo del sistema. ¡Hasta luego!");
                     break;
-                case 5: // Cambiar estrategia
-                    System.out.println("Selecciona una estrategia de prioridad:");
-                    System.out.println("1. Priorizar por gravedad");
-                    System.out.println("2. Priorizar por tipo de emergencia");
-                    int opcionEstrategia = entrada.nextInt();
-                    entrada.nextLine();
-
-                    if (opcionEstrategia == 1) {
-                        gestor.SetEstrategia(new EstrategiaPorPrioridad());
-                    } else if (opcionEstrategia == 2) {
-                        gestor.SetEstrategia(new EstrategiaPorPrioridad());
-                    } else {
-                        System.out.println("Opción no válida.");
-                    }
-                    break;
 
                 default:
-                    System.out.println("Opción no válida. Por favor, elige una opción entre 1 y 4.");
+                    System.out.println("Opción no válida. Por favor, elige una opción entre 1 y 7.");
             }
         }
 
@@ -97,6 +96,26 @@ public class menu {
             gestor.registrarEmergencia(emergencia);
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    // Método para seleccionar una estrategia de prioridad
+    private static void seleccionarEstrategia(Scanner scanner, sistemaGestor gestor) {
+        System.out.println("\n--- Seleccionar Estrategia de Prioridad ---");
+        System.out.println("1. Priorizar por gravedad");
+        System.out.println("2. Priorizar por tipo de emergencia");
+        System.out.print("Elige una opción: ");
+        int opcionEstrategia = scanner.nextInt();
+        scanner.nextLine(); // Limpia el buffer
+
+        if (opcionEstrategia == 1) {
+            gestor.SetEstrategia(new EstrategiaPorPrioridad());
+            System.out.println("Estrategia por gravedad seleccionada.");
+        } else if (opcionEstrategia == 2) {
+            gestor.SetEstrategia(new EstrategiaPorPrioridad());
+            System.out.println("Estrategia por tipo de emergencia seleccionada.");
+        } else {
+            System.out.println("Opción no válida.");
         }
     }
 }

@@ -82,7 +82,7 @@ public class ambulancia implements servicioEmergencia, observador {
         }
     }
 
-    @Override
+    @Override // metodo de la interfaz observador.
     public void notificar(String mensaje) {
       System.out.println(" ambulancia notificada "+mensaje);
         throw new UnsupportedOperationException("Unimplemented method 'notificar'");

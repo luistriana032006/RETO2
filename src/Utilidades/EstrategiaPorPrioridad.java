@@ -4,7 +4,7 @@ import modelo.emergencias.Emergencia;
 
 public class EstrategiaPorPrioridad implements EstrategiaPrioridad {
 
-    @Override // implementado de la extension Estrategia Prioridad
+    @Override // implementado de la interfaz Estrategia Prioridad
     public void asignarPrioridad(Emergencia emergencia) {
         
       int gravedad = emergencia.getNivelDeGravedad();

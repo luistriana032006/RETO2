@@ -476,20 +476,22 @@ public class sujeto {
 a clase menu actúa como el punto de entrada del sistema y proporciona un menú interactivo para que los usuarios elijan las acciones que desean realizar
 
 **Métodos Destacados:**
-~~main~~
-
+```
+main
+```
 Ejecuta el programa y controla el flujo principal mediante un bucle while que sigue mostrando el menú hasta que el usuario decida salir.
 
 Contiene un switch con todas las opciones disponibles.
-
-~~registrarEmergencia(Scanner scanner, sistemaGestor gestor)~~
+```
+registrarEmergencia(Scanner scanner, sistemaGestor gestor)
+```
 
 Captura los datos necesarios (tipo, ubicación, nivel de gravedad) desde la entrada del usuario.
 
 Usa la clase fabricaEmergencias del paquete Utilidades para crear dinámicamente una emergencia y la registra en el gestor.
-
-~~seleccionarEstrategia(Scanner scanner, sistemaGestor gestor)~~
-
+```
+seleccionarEstrategia(Scanner scanner, sistemaGestor gestor)
+```
 Permite al usuario cambiar la estrategia de priorización. Por ejemplo:
 
 Priorizar por nivel de gravedad.
